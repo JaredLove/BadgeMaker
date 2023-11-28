@@ -25,71 +25,46 @@ using System.Collections.Generic;
 namespace CatWorx.BadgeMaker
 {
     // A class is a blueprint for an object. It defines the data and behavior of the object.
-  class Program
+    // Program is a class containing the program’s Main() entry point method
+ class Program
+{
+  
+  static List<Employee> GetEmployees()
   {
-    // Main is the entry point of a C# application. It is the first method that is called when the program is run.
-    // In order for Main() to be recognized as the program's entry point, the following syntax guidelines must be followed:
-    // Main() must be nested in a class.
-    // There can only be one entry point to a program.
-    // The keyword void signifies that the return of this executable method will be void.
-    // The keyword static implies that the scope of this method is at the class level, not the object level, and can thus 
-    // be invoked without having to first create a new class instance. Hence the Main() method can be run as soon as the program runs.
-    static void Main(string[] args)
+    List<Employee> employees = new List<Employee>();
+    while (true)
     {
-        // string greeting = "Hello, World!";
-        // greeting = greeting + " I am a C# programmer now!";
-        // Console.WriteLine("greeting: {0}", greeting);
 
-        // float side = 3.14f;
-        // float area = side * side;
-        // Console.WriteLine($"The Area of the square is: {area}, the side is: {side}, and the type is: {side.GetType()}");
+      Console.WriteLine("Please enter a name: (leave empty to exit): ");
 
-        // bool isCold = true;
-        // Console.WriteLine(isCold ? "drink" : "add ice");  // output: drink
-        // Console.WriteLine(!isCold ? "drink" : "add ice");  // output: add ice
+      string input = Console.ReadLine() ?? "";
 
-        // string Num = "2";
-        // int intNum = Convert.ToInt32(Num);
-        // Console.WriteLine(intNum);
+      if (input == "")
+      {
+        break;
+      }
+      Employee currentEmployee = new Employee(input, "Smith");
+      employees.Add(currentEmployee);
+    }
+    return employees;
+  }
 
-
-        // dictionary by listing the key-value pairs in a function call.
-        // Dictionary<string, int> myScoreBoard = new Dictionary<string, int>(){
-        //     { "firstInning", 10 },
-        //     { "secondInning", 20},
-        //     { "thirdInning", 30},
-        //     { "fourthInning", 40},
-        //     { "fifthInning", 50}
-        // };
-
-        // Console.WriteLine("----------------");
-        // Console.WriteLine("  Scoreboard");
-        // Console.WriteLine("----------------");
-        // Console.WriteLine("Inning |  Score");
-        // Console.WriteLine("   1   |    {0}", myScoreBoard["firstInning"]);
-        // Console.WriteLine("   2   |    {0}", myScoreBoard["secondInning"]);
-        // Console.WriteLine("   3   |    {0}", myScoreBoard["thirdInning"]);
-        // Console.WriteLine("   4   |    {0}", myScoreBoard["fourthInning"]);
-        // Console.WriteLine("   5   |    {0}", myScoreBoard["fifthInning"]);
-
-
-        // To declare an array in C#, we must declare the data type and size, as shown in the following code block:
-        // Thus, just as in JavaScript, we can access the array using [] and the array's index.
-        // string[] favFoods = new string[3]{ "pizza", "doughnuts", "icecream" };
-        // string firstFood = favFoods[0];
-        // string secondFood = favFoods[1];
-        // string thirdFood = favFoods[2];
-        // Console.WriteLine("I like {0}, {1}, and {2}", firstFood, secondFood, thirdFood);
-
-
-        //lists
-        List<string> employees = new List<string>() { "adam", "amy" };
-        employees.Add("barbara");
-        employees.Add("billy");
+  //any method that does not return a value must be defined to return void.
+  static void PrintEmployees(List<Employee> employees)
+  {
         for (int i = 0; i < employees.Count; i++) 
         {
-        Console.WriteLine(employees[i]);
+          // each item in employees is now an Employee instance
+          Console.WriteLine(employees[i].GetFullName());
         }
-    }
   }
+
+  
+
+  static void Main(string[] args)
+  {
+    List<Employee> employees = GetEmployees();
+    PrintEmployees(employees);
+  }
+}
 }
