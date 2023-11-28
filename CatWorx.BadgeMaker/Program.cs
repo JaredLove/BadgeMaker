@@ -37,13 +37,22 @@ namespace CatWorx.BadgeMaker
 
       Console.WriteLine("Please enter a name: (leave empty to exit): ");
 
-      string input = Console.ReadLine() ?? "";
+      // change input to firstName
+      string firstName = Console.ReadLine() ?? "";
 
-      if (input == "")
+      if (firstName == "")
       {
         break;
       }
-      Employee currentEmployee = new Employee(input, "Smith");
+
+      // add a Console.ReadLine() for each value
+      Console.Write("Enter last name: ");
+      string lastName = Console.ReadLine() ?? "";
+      Console.Write("Enter ID: ");
+      int id = Int32.Parse(Console.ReadLine() ?? "");
+      Console.Write("Enter Photo URL:");
+      string photoUrl = Console.ReadLine() ?? "";
+      Employee currentEmployee = new Employee(firstName, lastName, id, photoUrl);
       employees.Add(currentEmployee);
     }
     return employees;
@@ -52,11 +61,14 @@ namespace CatWorx.BadgeMaker
   //any method that does not return a value must be defined to return void.
   static void PrintEmployees(List<Employee> employees)
   {
-        for (int i = 0; i < employees.Count; i++) 
-        {
-          // each item in employees is now an Employee instance
-          Console.WriteLine(employees[i].GetFullName());
-        }
+    //  (argument {0}), the id, to be left-aligned and padded to at least 10 characters, so we enter {0,-10}. 
+    //  Then we want to print a tab character (\t). We want the next argument ({1}), the name, to be left-aligned and padded to 20 characters—hence {1,-20}.
+    //  Next, we want to print another tab character (\t). And finally, we want to print the last argument ({2}), the photo URL, with no formatting: {2}.
+    for (int i = 0; i < employees.Count; i++) 
+    {
+      string template = "{0,-10}\t{1,-20}\t{2}";
+      Console.WriteLine(String.Format(template, employees[i].GetId(), employees[i].GetFullName(), employees[i].GetPhotoUrl()));
+    }
   }
 
   
